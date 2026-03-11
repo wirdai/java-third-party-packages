@@ -43,27 +43,29 @@ jobs:
 
       - name: Publish exposed 0.17.7
         run: |
-          mvn deploy:deploy-file \
+          output=$(mvn deploy:deploy-file \
             -Dfile=libs/exposed/exposed-0.17.7.jar \
             -DpomFile=libs/exposed/exposed-0.17.7.pom \
             -DrepositoryId=github \
-            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish ews-java-api 2.3
         run: |
-          mvn deploy:deploy-file \
+          output=$(mvn deploy:deploy-file \
             -Dfile=libs/ews-java-api/ews-java-api-2.3.jar \
             -DpomFile=libs/ews-java-api/ews-java-api-2.3.pom \
             -DrepositoryId=github \
-            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish EmailReplyParser 1.1
         run: |
-          mvn deploy:deploy-file \
+          output=$(mvn deploy:deploy-file \
             -Dfile=libs/emailreplyparser/EmailReplyParser-1.1.jar \
             -DpomFile=libs/emailreplyparser/EmailReplyParser-1.1.pom \
             -DgroupId=com.edlio.emailreplyparser \
@@ -71,6 +73,7 @@ jobs:
             -Dversion=1.1 \
             -Dpackaging=jar \
             -DrepositoryId=github \
-            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
