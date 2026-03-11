@@ -1,0 +1,72 @@
+name: Publish Third-Party Libraries
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Configure Maven for GitHub Packages
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml << EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${GITHUB_ACTOR}</username>
+                <password>${GITHUB_TOKEN}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish exposed 0.17.7
+        run: |
+          mvn deploy:deploy-file \
+            -Dfile=libs/exposed/exposed-0.17.7.jar \
+            -DpomFile=libs/exposed/exposed-0.17.7.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish ews-java-api 2.3
+        run: |
+          mvn deploy:deploy-file \
+            -Dfile=libs/ews-java-api/ews-java-api-2.3.jar \
+            -DpomFile=libs/ews-java-api/ews-java-api-2.3.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish EmailReplyParser 1.1
+        run: |
+          mvn deploy:deploy-file \
+            -Dfile=libs/emailreplyparser/EmailReplyParser-1.1.jar \
+            -DpomFile=libs/emailreplyparser/EmailReplyParser-1.1.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
