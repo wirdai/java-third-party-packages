@@ -77,3 +77,25 @@ jobs:
           (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish exposed 0.13.6
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/exposed/exposed-0.13.6.jar \
+            -DpomFile=libs/exposed/exposed-0.13.6.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish khttp 0.1.0
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/khttp/khttp-0.1.0.jar \
+            -DpomFile=libs/khttp/khttp-0.1.0.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
