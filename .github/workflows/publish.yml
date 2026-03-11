@@ -66,6 +66,10 @@ jobs:
           mvn deploy:deploy-file \
             -Dfile=libs/emailreplyparser/EmailReplyParser-1.1.jar \
             -DpomFile=libs/emailreplyparser/EmailReplyParser-1.1.pom \
+            -DgroupId=com.edlio.emailreplyparser \
+            -DartifactId=emailreplyparser \
+            -Dversion=1.1 \
+            -Dpackaging=jar \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }}
         env:
