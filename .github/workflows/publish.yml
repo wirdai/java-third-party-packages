@@ -110,3 +110,25 @@ jobs:
           (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish wm-redis-library 1.0.4
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/wm-redis-library/wm-redis-library-1.0.4.jar \
+            -DpomFile=libs/wm-redis-library/wm-redis-library-1.0.4.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish wm-monitor-endpoint 1.0.5
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/wm-monitor-endpoint/wm-monitor-endpoint-1.0.5.jar \
+            -DpomFile=libs/wm-monitor-endpoint/wm-monitor-endpoint-1.0.5.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
