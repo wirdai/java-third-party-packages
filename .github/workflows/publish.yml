@@ -48,7 +48,7 @@ jobs:
             -DpomFile=libs/exposed/exposed-0.17.7.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -59,7 +59,7 @@ jobs:
             -DpomFile=libs/ews-java-api/ews-java-api-2.3.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -74,7 +74,7 @@ jobs:
             -Dpackaging=jar \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -85,7 +85,7 @@ jobs:
             -DpomFile=libs/exposed/exposed-0.13.6.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -96,7 +96,7 @@ jobs:
             -DpomFile=libs/khttp/khttp-0.1.0.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -107,7 +107,7 @@ jobs:
             -DpomFile=libs/wm-redis-library/wm-redis-library-1.0.5.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -118,7 +118,7 @@ jobs:
             -DpomFile=libs/wm-redis-library/wm-redis-library-1.0.4.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -129,6 +129,6 @@ jobs:
             -DpomFile=libs/wm-monitor-endpoint/wm-monitor-endpoint-1.0.5.pom \
             -DrepositoryId=github \
             -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
-          (echo "$output" | grep -q "409" && echo "Already published, skipping" || (echo "$output" && exit 1))
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
