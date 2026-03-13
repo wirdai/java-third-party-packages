@@ -17,25 +17,6 @@
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>mavenCentral</id>
-            <url>https://repo1.maven.org/maven2/</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <id>wholemeaning-wm</id>
-            <url>https://dl.cloudsmith.io/public/wholemeaning/wm/maven/</url>
-        </repository>
-    </repositories>
-
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <testSourceDirectory>src/test/kotlin</testSourceDirectory>
@@ -111,15 +92,5 @@
             <version>1.0.1</version>
         </dependency>
     </dependencies>
-    <distributionManagement>
-        <snapshotRepository>
-            <id>cloudsmith</id>
-            <url>https://maven.cloudsmith.io/wholemeaning/wm/</url>
-        </snapshotRepository>
-        <repository>
-            <id>cloudsmith</id>
-            <url>https://maven.cloudsmith.io/wholemeaning/wm/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
