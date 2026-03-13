@@ -132,3 +132,36 @@ jobs:
           (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish wm-commons 1.2.6
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/wm-commons/wm-commons-1.2.6.jar \
+            -DpomFile=libs/wm-commons/wm-commons-1.2.6.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish wm-azure-service 1.1.1
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/wm-azure-service/wm-azure-service-1.1.1.jar \
+            -DpomFile=libs/wm-azure-service/wm-azure-service-1.1.1.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish wird-flow-wm-anti-corruption-layer-library 1.1.5
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/wird-flow-acl-library/wird-flow-wm-anti-corruption-layer-library-1.1.5.jar \
+            -DpomFile=libs/wird-flow-acl-library/wird-flow-wm-anti-corruption-layer-library-1.1.5.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
