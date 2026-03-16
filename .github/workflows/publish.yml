@@ -173,6 +173,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Publish wm-elasticsearch-commons 1.0.1
+        run: |
+          output=$(mvn deploy:deploy-file \
+            -Dfile=libs/wm-elasticsearch-commons/wm-elasticsearch-commons-1.0.1.jar \
+            -DpomFile=libs/wm-elasticsearch-commons/wm-elasticsearch-commons-1.0.1.pom \
+            -DrepositoryId=github \
+            -Durl=https://maven.pkg.github.com/${{ github.repository }} 2>&1) || \
+          (echo "$output" | grep -qE "409|422" && echo "Already published, skipping" || (echo "$output" && exit 1))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish wm-queue-library 1.2.2
         run: |
           output=$(mvn deploy:deploy-file \
