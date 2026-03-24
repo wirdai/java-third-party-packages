@@ -4,7 +4,7 @@
   <groupId>com.microsoft.graph</groupId>
   <artifactId>microsoft-graph-auth</artifactId>
   <version>0.2.0</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <dependencies>
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
